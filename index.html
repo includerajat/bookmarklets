@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Useful bookmarklets</title>
+</head>
+
+<body>
+  <h1>You can find useful bookmarklets here</h1>
+
+  <h2>How to use bookmarklets which provided below (use any one) ?</h2>
+  <p>
+  <ul>
+    <li>Right click on the link and copy the address and create new bookmark with that address and you can give any name
+      for bookmark,
+      which you can recognize.</li>
+    <li>Drag the link to the bookmark bar and drop it, it will automatically add the link in bookmarks bar.</li>
+  </ul>
+  </p>
+
+  <p>After adding the bookmark, you can click on the website where you want to use that bookmarklets by simply clicking
+    on the bookmark.</p>
+
+  <p> <a href="javascript: (() => {
+    function enableCopyPaste(ele) {
+      if (!ele) return;
+  
+      if (typeof ele.onpaste === 'function') {
+        ele.onpaste = function () {
+          return true;
+        }
+      }
+  
+      if (typeof ele.oncopy === 'function') {
+        ele.oncopy = function () {
+          return true;
+        }
+      }
+  
+      if (typeof ele.oncut === 'function') {
+        ele.oncut = function () {
+          return true;
+        }
+      }
+  
+      Array.from(ele.children).forEach(ele => {
+        enableCopyPaste(ele);
+      });
+  
+      Array.from(ele.contentDocument?.children ?? []).forEach(ele => {
+        enableCopyPaste(ele);
+      });
+    }
+  
+    enableCopyPaste(document);
+  
+    alert('Done');
+  })();">Enable copy/paste/cut</a> </p>
+
+  <p> <a href="javascript: (() => {
+    function showPasswords(ele) {
+      if (!ele) return;
+  
+      if (ele.type === 'password') {
+        ele.type = 'text';
+      }
+  
+      Array.from(ele.children).forEach(ele => {
+        showPasswords(ele);
+      });
+  
+      Array.from(ele.contentDocument?.children ?? []).forEach(ele => {
+        showPasswords(ele);
+      });
+    }
+  
+    showPasswords(document);
+  
+    alert('Done');
+  })();">Show passwords</a> </p>
+
+</body>
+
+</html>
